@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="akpsi_product_tree_view" model="ir.ui.view">
+            <field name="name">akpsi.product.tree.view</field>
+            <field name="model">akpsi.product</field>
+            <field name="arch" type="xml">
+                <tree string="Product" create="0">
+                    <field name="product_name"/>
+                    <field name="product_designer"/>
+                    <field name="product_type"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+        <record id="akpsi_product_form_view" model="ir.ui.view">
+            <field name="name">akpsi.product.form.view</field>
+            <field name="model">akpsi.product</field>
+            <field name="arch" type="xml">
+                <form string="Product" create="0">
+                    <header>
+                        <button name="action_validated" confirm="Are you sure you want to validate this product?" string="Validate" class="oe_highlight" type="object" attrs="{'invisible': [('state', '!=', 'submitted')]}"/>
+                        <button name="action_accepted" confirm="Are you sure you want to accept this product?" string="Accept" class="oe_highlight" type="object" attrs="{'invisible': [('state', '!=', 'validated')]}"/>
+                        <button name="action_back_to_draft" confirm="Are you sure you want to back to draft this product?" string="Back to Draft" class="oe_highlight" type="object" attrs="{'invisible': [('state', '!=', 'validated')]}"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,submitted,validated,accepted"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="product_name"/>
+                            <h1>
+                                <field name="product_name" attrs="{'readonly': [('state', '=', 'accepted')]}"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="product_designer" options="{'no_create': True, 'no_create_edit':True, 'no_open': True}" attrs="{'readonly': [('state', '=', 'accepted')]}"/>
+                                <field name="product_type" attrs="{'readonly': [('state', '=', 'accepted')]}"/>
+                                <field name="product_doc" string="Product" attrs="{'readonly': [('state', '!=', 'accepted')]}"/>
+                            </group>
+                        </group>
+                        <field name="mp_ids" nolabel="1" attrs="{'readonly': [('state', '=', 'accepted')]}">
+                          <tree string="Marketplace" editable="bottom">
+                              <field name="mp_name"/>
+                              <field name="mp_sku"/>
+                          </tree>
+                        </field>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record id="akpsi_product_action" model="ir.actions.act_window">
+            <field name="name">Product</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">akpsi.product</field>
+            <field name="domain">[ ('state', 'in', [
+                    'submitted',
+                    'validated',
+                    'accepted'
+                ])
+            ]</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('akpsi_product_tree_view')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('akpsi_product_form_view')})]"/>
+        </record>
+
+        <record id="akpsi_draft_product_tree_view" model="ir.ui.view">
+            <field name="name">akpsi.draft.product.tree.view</field>
+            <field name="model">akpsi.product</field>
+            <field name="arch" type="xml">
+                <tree string="Draft Product">
+                    <field name="product_name"/>
+                    <field name="product_designer"/>
+                    <field name="product_type"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+        <record id="akpsi_draft_product_form_view" model="ir.ui.view">
+            <field name="name">akpsi.draft.product.form.view</field>
+            <field name="model">akpsi.product</field>
+            <field name="arch" type="xml">
+                <form string="Draft Product">
+                    <header>
+                        <button name="action_submitted" confirm="Are you sure you want to submit this draft product?" string="Submit" class="oe_highlight" type="object" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,submitted,validated,accepted"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="product_name"/>
+                            <h1>
+                                <field name="product_name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="product_designer" options="{'no_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                                <field name="product_type"/>
+                                <field name="product_doc" string="Product"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record id="akpsi_draft_product_action" model="ir.actions.act_window">
+            <field name="name">Draft Product</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">akpsi.product</field>
+            <field name="domain">[('state', '=', 'draft')]</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('akpsi_draft_product_tree_view')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('akpsi_draft_product_form_view')})]"/>
+        </record>
+
+        <record id="akpsi_draft_product_form_view_designer" model="ir.ui.view">
+            <field name="name">akpsi.draft.product.form.view.designer</field>
+            <field name="model">akpsi.product</field>
+            <field name="arch" type="xml">
+                <form string="Draft Product">
+                    <header>
+                        <button name="action_submitted" confirm="Are you sure you want to submit this draft product?" string="Submit" class="oe_highlight" type="object" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,submitted,validated,accepted"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="product_name"/>
+                            <h1>
+                                <field name="product_name" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="product_designer" readonly="1" options="{'no_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                                <field name="product_type" readonly="1"/>
+                                <field name="product_doc" string="Product"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record id="akpsi_draft_product_action_designer" model="ir.actions.act_window">
+            <field name="name">Draft Product</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">akpsi.product</field>
+            <field name="domain">[('state', '=', 'draft')]</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('akpsi_draft_product_tree_view')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('akpsi_draft_product_form_view_designer')})]"/>
+        </record>
+    </data>
+</odoo>

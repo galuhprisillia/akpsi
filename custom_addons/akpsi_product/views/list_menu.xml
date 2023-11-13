@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--Level 1 Menu-->
+        <menuitem id="akpsi_master_menu_employee_root"
+                  name="Employee"
+                  groups="group_owner,group_admin,group_designer"
+                  sequence="10"/>
+        <menuitem id="akpsi_master_menu_draft_product_root"
+                  name="Draft Product"
+                  groups="group_owner"
+                  sequence="20"/>
+        <menuitem id="akpsi_master_menu_product_root"
+                  name="Product"
+                  groups="group_owner,group_admin"
+                  sequence="30"/>
+        <menuitem id="akpsi_master_menu_project_root"
+                  name="Project"
+                  groups="group_owner,group_admin,group_designer"
+                  sequence="40"/>
+
+        <menuitem id="akpsi_master_menu_draft_product_root_designer"
+                  name="Draft Product"
+                  groups="group_designer"
+                  sequence="25"/>
+
+        <!--Level 2 Menu-->
+        <menuitem id="akpsi_master_menu_employee"
+                  name="Employee"
+                  parent="akpsi_master_menu_employee_root"
+                  action="akpsi_employee_action"
+                  sequence="10"/>
+        <menuitem id="akpsi_master_menu_draft_product"
+                  name="Draft Product"
+                  parent="akpsi_master_menu_draft_product_root"
+                  action="akpsi_draft_product_action"
+                  sequence="20"/>
+        <menuitem id="akpsi_master_menu_product"
+                  name="Product"
+                  parent="akpsi_master_menu_product_root"
+                  action="akpsi_product_action"
+                  sequence="30"/>
+        <menuitem id="akpsi_master_menu_project"
+                  name="Project"
+                  parent="akpsi_master_menu_project_root"
+                  action="project.open_view_project_all_group_stage"
+                  sequence="40"/>
+
+        <menuitem id="akpsi_master_menu_draft_product_designer"
+                  name="Draft Product"
+                  parent="akpsi_master_menu_draft_product_root_designer"
+                  action="akpsi_draft_product_action_designer"
+                  sequence="25"/>
+    </data>
+</odoo>
