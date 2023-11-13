@@ -1,0 +1,33 @@
+services:
+  web:
+    build: .
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - "2628:8069"
+    volumes:
+      - odoo-web-data:/var/lib/odoo
+      - ./custom_addons:/mnt/extra-addons
+      - ./config:/etc/odoo
+    environment:
+      - HOST=db
+      - USER=odoo
+      - PASSWORD=odoo
+    #command: odoo -s -c /etc/odoo/odoo.conf -d akpsi -u all
+  db:
+    image: postgres:12.11
+    restart: always
+    ports:
+      - "2611:5432"
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=odoo
+      - POSTGRES_PASSWORD=odoo
+    user: "${UID}:${GID}"
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+version: "3"
+volumes:
+  odoo-web-data:
+    driver: local
