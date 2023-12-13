@@ -4,28 +4,46 @@
         <!--Level 1 Menu-->
         <menuitem id="akpsi_master_menu_employee_root"
                   name="Employee"
-                  groups="group_owner,group_admin,group_designer"
+                  groups="group_owner,base.group_system"
+                  web_icon="akpsi_product,static/png/member.png"
                   sequence="10"/>
         <menuitem id="akpsi_master_menu_draft_product_root"
                   name="Draft Product"
-                  groups="group_owner"
+                  groups="group_owner,base.group_system"
+                  web_icon="akpsi_product,static/png/report.png"
                   sequence="20"/>
         <menuitem id="akpsi_master_menu_product_root"
                   name="Product"
-                  groups="group_owner"
+                  groups="group_owner,base.group_system"
+                  web_icon="akpsi_product,static/png/disbursement.png"
                   sequence="30"/>
         <menuitem id="akpsi_master_menu_project_root"
                   name="Project"
-                  groups="group_owner,group_admin,group_designer"
+                  groups="group_owner,group_admin,group_designer,base.group_system"
+                  web_icon="akpsi_product,static/png/blog.png"
                   sequence="40"/>
 
+        <menuitem id="akpsi_master_menu_employee_admin"
+                  name="Employee"
+                  groups="group_admin"
+                  web_icon="akpsi_product,static/png/member.png"
+                  action="akpsi_employee_action_admin"
+                  sequence="15"/>
+        <menuitem id="akpsi_master_menu_employee_designer"
+                  name="Employee"
+                  groups="group_designer"
+                  web_icon="akpsi_product,static/png/member.png"
+                  action="akpsi_employee_action_designer"
+                  sequence="16"/>
         <menuitem id="akpsi_master_menu_draft_product_root_designer"
                   name="Draft Product"
                   groups="group_designer"
+                  web_icon="akpsi_product,static/png/report.png"
                   sequence="25"/>
         <menuitem id="akpsi_master_menu_product_root_admin"
                   name="Product"
                   groups="group_admin"
+                  web_icon="akpsi_product,static/png/disbursement.png"
                   sequence="35"/>
 
         <!--Level 2 Menu-->
@@ -44,12 +62,22 @@
                   parent="akpsi_master_menu_product_root"
                   action="akpsi_product_action"
                   sequence="30"/>
+        <menuitem id="akpsi_master_menu_marketplace"
+                  name="Marketplace"
+                  parent="akpsi_master_menu_product_root"
+                  action="akpsi_marketplace_action"
+                  sequence="60"/>
         <menuitem id="akpsi_master_menu_project"
                   name="Project"
                   parent="akpsi_master_menu_project_root"
                   action="project.open_view_project_all_group_stage"
                   sequence="40"/>
 
+<!--        <menuitem id="akpsi_master_menu_employee_admin"-->
+<!--                  name="Employee"-->
+<!--                  parent="akpsi_master_menu_employee_admin"-->
+<!--                  action="akpsi_employee_action_admin"-->
+<!--                  sequence="15"/>-->
         <menuitem id="akpsi_master_menu_draft_product_designer"
                   name="Draft Product"
                   parent="akpsi_master_menu_draft_product_root_designer"

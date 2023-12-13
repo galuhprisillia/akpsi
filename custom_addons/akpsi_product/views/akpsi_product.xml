@@ -25,25 +25,40 @@
                         <field name="state" widget="statusbar" statusbar_visible="draft,submitted,validated,accepted"/>
                     </header>
                     <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" string="Caption" name="generate_tag" type="object" icon="fa-print"/>
+                        </div>
                         <div class="oe_title">
                             <label for="product_name"/>
                             <h1>
-                                <field name="product_name" attrs="{'readonly': [('state', '=', 'accepted')]}"/>
+                                <field name="product_name" readonly="1"/>
                             </h1>
                         </div>
-                        <group>
-                            <group>
-                                <field name="product_designer" options="{'no_create': True, 'no_create_edit':True, 'no_open': True}" attrs="{'readonly': [('state', '=', 'accepted')]}"/>
-                                <field name="product_type" attrs="{'readonly': [('state', '=', 'accepted')]}"/>
-                                <field name="product_doc" string="Product" attrs="{'readonly': [('state', '!=', 'accepted')]}"/>
-                            </group>
-                        </group>
-                        <field name="mp_ids" nolabel="1" attrs="{'readonly': [('state', '=', 'accepted')]}">
-                          <tree string="Marketplace" editable="bottom">
-                              <field name="mp_name"/>
-                              <field name="mp_sku"/>
-                          </tree>
-                        </field>
+                        <notebook>
+                            <page string="Product Details">
+                                <group>
+                                    <group>
+                                        <field name="product_designer" options="{'no_create': True, 'no_create_edit':True, 'no_open': True}" readonly="1"/>
+                                        <field name="product_type" readonly="1"/>
+                                        <field name="product_doc" string="Product" readonly="1"/>
+                                    </group>
+<!--                                    <group>-->
+<!--                                        <field name="product_tag" readonly="1"/>-->
+<!--                                        <field name="product_description" readonly="1"/>-->
+<!--                                    </group>-->
+                                </group>
+                            </page>
+                            <page string="Marketplace Details">
+                                <field name="mp_ids" nolabel="1" attrs="{'readonly': [('state', '=', 'accepted')]}">
+                                    <tree string="Marketplace" editable="bottom">
+                                        <field name="mp_name"/>
+                                        <field name="product_tag"/>
+                                        <field name="product_description"/>
+                                        <field name="mp_sku"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
                     </sheet>
                     <div class="oe_chatter">
                         <field name="message_follower_ids"/>
@@ -80,25 +95,40 @@
                         <field name="state" widget="statusbar" statusbar_visible="draft,submitted,validated,accepted"/>
                     </header>
                     <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" string="Caption" name="generate_tag" type="object" icon="fa-print"/>
+                        </div>
                         <div class="oe_title">
                             <label for="product_name"/>
                             <h1>
                                 <field name="product_name" readonly="1"/>
                             </h1>
                         </div>
-                        <group>
-                            <group>
-                                <field name="product_designer" readonly="1" options="{'no_create': True, 'no_create_edit':True, 'no_open': True}" attrs="{'readonly': [('state', '=', 'accepted')]}"/>
-                                <field name="product_type" readonly="1"/>
-                                <field name="product_doc" string="Product" readonly="1"/>
-                            </group>
-                        </group>
-                        <field name="mp_ids" nolabel="1" attrs="{'readonly': [('state', '=', 'accepted')]}">
-                          <tree string="Marketplace" editable="bottom">
-                              <field name="mp_name"/>
-                              <field name="mp_sku"/>
-                          </tree>
-                        </field>
+                        <notebook>
+                            <page string="Product Details">
+                                <group>
+                                    <group>
+                                        <field name="product_designer" readonly="1" options="{'no_create': True, 'no_create_edit':True, 'no_open': True}" attrs="{'readonly': [('state', '=', 'accepted')]}"/>
+                                        <field name="product_type" readonly="1"/>
+                                        <field name="product_doc" string="Product" readonly="1"/>
+                                    </group>
+<!--                                    <group>-->
+<!--                                        <field name="product_tag" readonly="1"/>-->
+<!--                                        <field name="product_description" readonly="1"/>-->
+<!--                                    </group>-->
+                                </group>
+                            </page>
+                            <page string="Marketplace Details">
+                                <field name="mp_ids" nolabel="1" attrs="{'readonly': [('state', '=', 'accepted')]}">
+                                    <tree string="Marketplace" editable="bottom">
+                                        <field name="mp_name"/>
+                                        <field name="product_tag"/>
+                                        <field name="product_description"/>
+                                        <field name="mp_sku"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
                     </sheet>
                     <div class="oe_chatter">
                         <field name="message_follower_ids"/>
@@ -123,61 +153,6 @@
                 (0, 0, {'view_mode': 'form', 'view_id': ref('akpsi_product_form_view_admin')})]"/>
         </record>
 
-        <record id="akpsi_product_form_view" model="ir.ui.view">
-            <field name="name">akpsi.product.form.view</field>
-            <field name="model">akpsi.product</field>
-            <field name="arch" type="xml">
-                <form string="Product" create="0">
-                    <header>
-                        <button name="action_validated" confirm="Are you sure you want to validate this product?" string="Validate" class="oe_highlight" type="object" attrs="{'invisible': [('state', '!=', 'submitted')]}"/>
-                        <button name="action_accepted" confirm="Are you sure you want to accept this product?" string="Accept" class="oe_highlight" type="object" attrs="{'invisible': [('state', '!=', 'validated')]}"/>
-                        <button name="action_back_to_draft" confirm="Are you sure you want to back to draft this product?" string="Back to Draft" class="oe_highlight" type="object" attrs="{'invisible': [('state', '!=', 'validated')]}"/>
-                        <field name="state" widget="statusbar" statusbar_visible="draft,submitted,validated,accepted"/>
-                    </header>
-                    <sheet>
-                        <div class="oe_title">
-                            <label for="product_name"/>
-                            <h1>
-                                <field name="product_name" attrs="{'readonly': [('state', '=', 'accepted')]}"/>
-                            </h1>
-                        </div>
-                        <group>
-                            <group>
-                                <field name="product_designer" options="{'no_create': True, 'no_create_edit':True, 'no_open': True}" attrs="{'readonly': [('state', '=', 'accepted')]}"/>
-                                <field name="product_type" attrs="{'readonly': [('state', '=', 'accepted')]}"/>
-                                <field name="product_doc" string="Product" attrs="{'readonly': [('state', '!=', 'accepted')]}"/>
-                            </group>
-                        </group>
-                        <field name="mp_ids" nolabel="1" attrs="{'readonly': [('state', '=', 'accepted')]}">
-                          <tree string="Marketplace" editable="bottom">
-                              <field name="mp_name"/>
-                              <field name="mp_sku"/>
-                          </tree>
-                        </field>
-                    </sheet>
-                    <div class="oe_chatter">
-                        <field name="message_follower_ids"/>
-                        <field name="message_ids"/>
-                    </div>
-                </form>
-            </field>
-        </record>
-        <record id="akpsi_product_action" model="ir.actions.act_window">
-            <field name="name">Product</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">akpsi.product</field>
-            <field name="domain">[ ('state', 'in', [
-                    'submitted',
-                    'validated',
-                    'accepted'
-                ])
-            ]</field>
-            <field name="view_mode">tree,form</field>
-            <field name="view_ids" eval="[(5, 0, 0),
-                (0, 0, {'view_mode': 'tree', 'view_id': ref('akpsi_product_tree_view')}),
-                (0, 0, {'view_mode': 'form', 'view_id': ref('akpsi_product_form_view')})]"/>
-        </record>
-
         <record id="akpsi_draft_product_tree_view" model="ir.ui.view">
             <field name="name">akpsi.draft.product.tree.view</field>
             <field name="model">akpsi.product</field>
@@ -196,7 +171,7 @@
             <field name="arch" type="xml">
                 <form string="Draft Product">
                     <header>
-                        <button name="action_submitted" confirm="Are you sure you want to submit this draft product?" string="Submit" class="oe_highlight" type="object" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                        <button name="action_submitted" confirm="Are you sure you want to submit this draft product?" string="Submit" class="oe_highlight" type="object" attrs="{'invisible': [('state', '!=', 'draft')]}" groups="akpsi_product.group_designer"/>
                         <field name="state" widget="statusbar" statusbar_visible="draft,submitted,validated,accepted"/>
                     </header>
                     <sheet>

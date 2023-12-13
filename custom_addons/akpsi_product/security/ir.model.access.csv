@@ -1,6 +1,8 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 akpsi_product_owner,akpsi_product_owner,model_akpsi_product,group_owner,1,1,1,0
+akpsi_product_system,akpsi_product_system,model_akpsi_product,base.group_system,1,1,1,0
 akpsi_product_admin,akpsi_product_admin,model_akpsi_product,group_admin,1,1,0,0
 akpsi_product_designer,akpsi_product_designer,model_akpsi_product,group_designer,1,1,0,0
 marketplace_admin,marketplace_admin,model_marketplace,group_admin,1,1,1,0
-marketplace_owner,marketplace_owner,model_marketplace,group_owner,1,0,0,0
+marketplace_owner,marketplace_owner,model_marketplace,group_owner,1,1,1,0
+marketplace_system,marketplace_system,model_marketplace,base.group_system,1,1,1,0

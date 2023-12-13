@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
+<!--        OWNER-->
         <record id="akpsi_employee_tree_view" model="ir.ui.view">
             <field name="name">akpsi.employee.tree.view</field>
             <field name="model">res.partner</field>
             <field name="arch" type="xml">
                 <tree string="Product">
-<!--                    <field name="nip"/>-->
+                    <field name="nip"/>
                     <field name="name"/>
                     <field name="email"/>
                     <field name="mobile"/>
+                    <field name="role"/>
                 </tree>
             </field>
         </record>
@@ -30,15 +32,15 @@
                             <page string="Employee Details">
                                 <group>
                                     <group>
-<!--                                        <field name="nip"/>-->
+                                        <field name="nip" readonly="1"/>
                                         <field name="email"/>
                                         <field name="mobile"/>
                                         <field name="role"/>
                                     </group>
                                     <group>
-                                        <field name="street"/>
-                                        <field name="zip"/>
+                                        <field name="street" string="Address"/>
                                         <field name="city"/>
+                                        <field name="zip"/>
                                     </group>
                                 </group>
                             </page>
@@ -55,11 +57,86 @@
             <field name="name">Employee</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">res.partner</field>
-<!--            <field name="search_view_id" ref="kad_unboxing_party.kad_unboxing_user_search_view"/>-->
             <field name="view_mode">tree,form</field>
             <field name="view_ids" eval="[(5, 0, 0),
                 (0, 0, {'view_mode': 'tree', 'view_id': ref('akpsi_employee_tree_view')}),
                 (0, 0, {'view_mode': 'form', 'view_id': ref('akpsi_employee_form_view')})]"/>
+        </record>
+
+
+<!--        ADMIN-->
+        <record id="akpsi_employee_tree_view_admin" model="ir.ui.view">
+            <field name="name">akpsi.employee.tree.view.admin</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <tree string="Product" create="0" edit="0">
+                    <field name="nip"/>
+                    <field name="name"/>
+                    <field name="email"/>
+                    <field name="mobile"/>
+                    <field name="role"/>
+                </tree>
+            </field>
+        </record>
+        <record id="akpsi_employee_form_view_admin" model="ir.ui.view">
+            <field name="name">akpsi.employee.form.view.admin</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <form string="Employee" edit="0">
+                    <sheet>
+                        <field name="image_1920" widget="image" class="oe_avatar" options="{&quot;preview_image&quot;: &quot;image_128&quot;}"/>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                        <notebook>
+                            <page string="Employee Details">
+                                <group>
+                                    <group>
+                                        <field name="nip" readonly="1"/>
+                                        <field name="email"/>
+                                        <field name="mobile"/>
+                                        <field name="role"/>
+                                    </group>
+                                    <group>
+                                        <field name="street" string="Address"/>
+                                        <field name="city"/>
+                                        <field name="zip"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record id="akpsi_employee_action_admin" model="ir.actions.act_window">
+            <field name="name">Employee</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('email','=','admin@email.com')]</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('akpsi_employee_tree_view_admin')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('akpsi_employee_form_view_admin')})]"/>
+        </record>
+
+<!--        DESIGNER-->
+        <record id="akpsi_employee_action_designer" model="ir.actions.act_window">
+            <field name="name">Employee</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('email','=','designer@email.com')]</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('akpsi_employee_tree_view_admin')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('akpsi_employee_form_view_admin')})]"/>
         </record>
     </data>
 </odoo>

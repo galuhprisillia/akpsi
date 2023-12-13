@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="base.main_company" model="res.company">
+            <field name="name">Kreev Studio</field>
+<!--            <field name="logo" type="base64" file="akpsi_product/static/png/code_logo.png"/>-->
+<!--            <field name="favicon" type="base64" file="akpsi_product/static/png/fav_icon.png"/>-->
+            <field name="logo" type="base64" file="akpsi_product/static/png/logo.png"/>
+            <field name="favicon" type="base64" file="akpsi_product/static/png/logo.png"/>
+        </record>
+<!--        <record id="project_task_1" model="project.task.type">-->
+<!--            <field name="name">To Do</field>-->
+<!--            <field name="sequence">1</field>-->
+<!--        </record>-->
+<!--        <record id="project_task_2" model="project.task.type">-->
+<!--            <field name="name">In Progress</field>-->
+<!--            <field name="sequence">2</field>-->
+<!--        </record>-->
+<!--        <record id="project_task_3" model="project.task.type">-->
+<!--            <field name="name">Done</field>-->
+<!--            <field name="sequence">3</field>-->
+<!--        </record>-->
+<!--        <record id="project_task_4" model="project.task.type">-->
+<!--            <field name="name">Waiting to Validated</field>-->
+<!--            <field name="sequence">4</field>-->
+<!--        </record>-->
+<!--        <record id="project_task_5" model="project.task.type">-->
+<!--            <field name="name">Finished</field>-->
+<!--            <field name="sequence">5</field>-->
+<!--        </record>-->
+    </data>
+</odoo>

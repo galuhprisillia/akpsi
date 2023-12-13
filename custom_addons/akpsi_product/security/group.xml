@@ -19,5 +19,25 @@
             <field name="name">Designer</field>
             <field name="category_id" ref="module_akpsi_base"/>
         </record>
+        <record id="stage_task" model="ir.rule">
+            <field name="name">Designer Stage</field>
+            <field ref="project.model_project_task_type" name="model_id"/>
+            <field name="domain_force"></field>
+            <field name="perm_write" eval="0"/>
+            <field name="perm_create" eval="0"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_unlink" eval="0"/>
+            <field name="groups" eval="[(4, ref('group_designer')),(4, ref('group_admin'))]"/>
+        </record>
+<!--        <record id="employee_admin" model="ir.rule">-->
+<!--            <field name="name">admin and designer can see its own records</field>-->
+<!--            <field name="model_id" ref="model_res_partner"/>-->
+<!--            <field name="domain_force">[('id','=',user.partner_id.id)]</field>-->
+<!--            <field name="groups" eval="[(4, ref('group_designer')),(4, ref('group_admin'))]"/>-->
+<!--            <field name='perm_create' eval="0"/>-->
+<!--            <field name='perm_read' eval="1"/>-->
+<!--            <field name='perm_unlink' eval="0"/>-->
+<!--            <field name='perm_write' eval="0"/>-->
+<!--        </record>-->
     </data>
 </odoo>

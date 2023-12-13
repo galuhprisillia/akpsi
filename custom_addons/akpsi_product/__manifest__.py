@@ -20,12 +20,15 @@
     ],
     'demo': [],
     'data': [
+        'data/sequence.xml',
         'security/group.xml',
         'security/ir.model.access.csv',
         'views/akpsi_product.xml',
         'views/akpsi_project.xml',
         'views/akpsi_employee.xml',
-        'views/list_menu.xml'
+        'views/akpsi_marketplace.xml',
+        'views/list_menu.xml',
+        'data/default_company.xml'
     ],
     'installable': True,
     'application': False,
