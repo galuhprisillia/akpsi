@@ -7,6 +7,14 @@ class AKPSIProject(models.Model):
     _inherit = "project.task"
 
     product_id = fields.Many2one(comodel_name='akpsi.product', string="Product")
+
+    @api.onchange('product_id')
+    def set_designer(self):
+        for me in self:
+            me.product_id.update({
+                'product_designer': 15
+            })
+        return
     
 
 class Project(models.Model):

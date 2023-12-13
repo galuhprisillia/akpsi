@@ -1,7 +1,9 @@
 import logging
-
-from odoo import fields, models, api, _
+import base64
+from odoo import fields, models, api, tools, _
 from odoo.exceptions import UserError, ValidationError
+from odoo.modules.module import get_module_resource
+from odoo import modules
 
 
 class AKPSIProduct(models.Model):
@@ -10,6 +12,14 @@ class AKPSIProduct(models.Model):
     _inherit = 'mail.thread'
     _rec_name = 'product_name'
 
+    def generate_temp(self):
+        att = self.env['ir.attachment'].browse(55)
+        self.update({
+            'template_doc': att.datas
+        })
+        logging.info("print datas", att.id)
+        return
+
     product_name = fields.Char(string="Product Name", tracking=True)
     product_designer = fields.Many2one(comodel_name='res.partner', string="Designer", tracking=True)
     product_type = fields.Selection(string="Type", selection=[
@@ -17,6 +27,7 @@ class AKPSIProduct(models.Model):
         ('icon', 'Icon Bundle')
     ], tracking=True)
     product_doc = fields.Binary(string="Product", tracking=True)
+    template_doc = fields.Binary(string="Template", tracking=True)
     state = fields.Selection(string="Product State", selection=[
         ('draft','Draft'),
         ('submitted', 'Submitted'),

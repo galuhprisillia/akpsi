@@ -6,3 +6,10 @@ akpsi_product_designer,akpsi_product_designer,model_akpsi_product,group_designer
 marketplace_admin,marketplace_admin,model_marketplace,group_admin,1,1,1,0
 marketplace_owner,marketplace_owner,model_marketplace,group_owner,1,1,1,0
 marketplace_system,marketplace_system,model_marketplace,base.group_system,1,1,1,0
+project_task_admin,project_task_admin,model_project_task,group_admin,1,0,0,0
+project_task_owner,project_task_owner,model_project_task,group_owner,1,1,1,1
+project_task_designer,project_task_designer,model_project_task,group_designer,1,0,0,0
+project_task_system,project_task_system,model_project_task,base.group_system,1,0,0,0
+project_project_admin,project_project_admin,model_project_project,group_admin,1,0,0,0
+project_project_owner,project_project_owner,model_project_project,group_owner,1,1,1,1
+project_project_designer,project_project_designer,model_project_project,group_designer,1,0,0,0

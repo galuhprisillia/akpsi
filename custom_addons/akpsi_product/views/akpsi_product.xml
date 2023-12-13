@@ -52,8 +52,8 @@
                                 <field name="mp_ids" nolabel="1" attrs="{'readonly': [('state', '=', 'accepted')]}">
                                     <tree string="Marketplace" editable="bottom">
                                         <field name="mp_name"/>
-                                        <field name="product_tag"/>
-                                        <field name="product_description"/>
+                                        <field name="product_tag" readonly="1"/>
+                                        <field name="product_description" readonly="1"/>
                                         <field name="mp_sku"/>
                                     </tree>
                                 </field>
@@ -122,8 +122,8 @@
                                 <field name="mp_ids" nolabel="1" attrs="{'readonly': [('state', '=', 'accepted')]}">
                                     <tree string="Marketplace" editable="bottom">
                                         <field name="mp_name"/>
-                                        <field name="product_tag"/>
-                                        <field name="product_description"/>
+                                        <field name="product_tag" readonly="1"/>
+                                        <field name="product_description" readonly="1"/>
                                         <field name="mp_sku"/>
                                     </tree>
                                 </field>
@@ -183,7 +183,7 @@
                         </div>
                         <group>
                             <group>
-                                <field name="product_designer" options="{'no_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                                <field name="product_designer" readonly="1" options="{'no_create': True, 'no_create_edit':True, 'no_open': True}"/>
                                 <field name="product_type"/>
                                 <field name="product_doc" string="Product"/>
                             </group>
@@ -217,6 +217,9 @@
                         <field name="state" widget="statusbar" statusbar_visible="draft,submitted,validated,accepted"/>
                     </header>
                     <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" string="Template" name="generate_temp" type="object" icon="fa-print"/>
+                        </div>
                         <div class="oe_title">
                             <label for="product_name"/>
                             <h1>
@@ -227,6 +230,7 @@
                             <group>
                                 <field name="product_designer" readonly="1" options="{'no_create': True, 'no_create_edit':True, 'no_open': True}"/>
                                 <field name="product_type" readonly="1"/>
+                                <field name="template_doc" readonly="1" widget="binary"/>
                                 <field name="product_doc" string="Product"/>
                             </group>
                         </group>
@@ -242,7 +246,7 @@
             <field name="name">Draft Product</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">akpsi.product</field>
-            <field name="domain">[('state', '=', 'draft')]</field>
+            <field name="domain">[('state', '=', 'draft'),('product_designer','=','designer@email.com')]</field>
             <field name="view_mode">tree,form</field>
             <field name="view_ids" eval="[(5, 0, 0),
                 (0, 0, {'view_mode': 'tree', 'view_id': ref('akpsi_draft_product_tree_view')}),
