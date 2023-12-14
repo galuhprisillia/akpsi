@@ -114,11 +114,24 @@ class AKPSIProduct(models.Model):
         words_in_title = title.lower().split()
         for me in self:
             for word in words_in_title:
+                logging.info("word", word)
                 if word in tags:
-                    me.update({
-                        'product_description': tags[word]['desc'],
-                        'product_tag': tags[word]['hastag']
-                    })
+                    logging.info("me", me)
+                    logging.info("desc", tags[word]['desc'])
+                    for mp in me.mp_ids:
+                        mp.update({
+                            'product_description': tags[word]['desc'],
+                            'product_tag': tags[word]['hastag']
+                        })
+                # else:
+                #     logging.info("me else", me)
+                #     logging.info("tags", tags[word])
+                #     me.update({
+                #         'mp_ids': [(0, 0, {
+                #             'product_description': tags[word]['desc'],
+                #             'product_tag': tags[word]['hastag']
+                #         })]
+                #     })
         return
 
 

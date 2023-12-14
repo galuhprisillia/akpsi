@@ -42,7 +42,7 @@
 <!--        <record id="task_designer" model="ir.rule">-->
 <!--            <field name="name">designer can see own task</field>-->
 <!--            <field name="model_id" ref="model_project_task"/>-->
-<!--            <field name="domain_force">[('user_ids','in',user)]</field>-->
+<!--            <field name="domain_force">[('user_ids.login','=','designer@email.com')]</field>-->
 <!--            <field name="groups" eval="[(4, ref('group_designer'))]"/>-->
 <!--            <field name='perm_create' eval="0"/>-->
 <!--            <field name='perm_read' eval="1"/>-->
